@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Search Uploads</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-green-700 text-white px-6 py-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">Search Uploads</h1>
+    <a href="/admin" class="bg-white text-green-700 px-4 py-2 rounded">Home</a>
+  </header>
+ <div class="flex h-[calc(100vh-40px)]">
+
+    <!-- Sidebar -->
+    <aside id="sidebar"
+      class="bg-green-700 text-white w-52 space-y-6 px-6 py-6 h-full md:translate-x-0 transform transition-transform duration-300 ease-in-out fixed md:relative z-50 md:block -translate-x-full md:translate-x-0">
+
+      <button onclick="toggleSidebar()" class="absolute top-4 right-6 text-white text-xl md:hidden">&times;</button>
+
+      <nav class="space-y-4 text-base font-semibold">
+        <a href="/admin" class="block hover:underline">Home</a>.
+        <a href="/admin/dashboard" class="block hover:underline">Dashboard</a>
+        <a href="/admin/search" class="block hover:underline">Search for questions</a>
+      
+        <a href="/logout" class="block text-red-300 hover:underline">Logout</a>
+      </nav>
+    </aside>
+  <main class="p-6 max-w-4xl mx-auto">
+    <!-- Search Form -->
+    <form method="POST" class="mb-6 bg-white p-6 rounded shadow">
+      <label for="course_code" class="block text-lg font-semibold mb-2">Enter Course Code (e.g. COM111):</label>
+      <input type="text" name="course_code" id="course_code" value="{{ query }}" required
+             class="w-full px-4 py-2 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-green-500">
+      <button type="submit"
+              class="bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded text-lg">Search</button>
+    </form>
+{% if course_code %}
+    <h2>Results for {{ course_code }}</h2>
+    
+    {% if images %}
+      <div class="gallery">
+        {% for image in images %}
+          <div class="gallery-item">
+            <img src="{{ url_for('get_image', image_id=image['uploaded_id']) }}" width="200" alt="Image">
+            <p>{{ image['file_name'] }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No images found for {{ course_code }}</p>
+    {% endif %}
+  {% endif %}
+  </main>
+  </div>
+
+</body>
+</html>

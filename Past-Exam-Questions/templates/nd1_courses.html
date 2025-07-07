@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fffefe;
+            padding-top: auto;
+            display: block;
+        }
+        .main{
+            display: flex;
+        }
+        .sub-main{
+            display: block;
+        }
+        form {
+            background: #fff;
+            align-self: left;
+            padding: 20px;
+            
+            margin: auto;
+            height: auto;
+            width: 60%;
+            border-radius: auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: #45a049;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>COMPUTER SCIENCE <br>ND 1</h1>
+<br><br>
+    
+    <!-- Form to upload the image -->
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      
+        <a href="{{ url_for('display_images', course_code='COM111', file_name='2023_exam') }}">
+           <button type="button"> View COM 111 Past Questions</button> <br><br>
+        <a href="{{ url_for('display_images', course_code='COM112', file_name='2023_exam') }}">
+            <button type="button"> View COM 112 Past Questions</button> <br><br>
+        <a href="{{ url_for('display_images', course_code='COM113', file_name='2023_exam') }}">
+            <button type="button">View COM 113 Past Questions</button> <br><br>
+        <a href="{{ url_for('display_images', course_code='COM114', file_name='2023_exam') }}">
+            <button type="button">View COM 114 Past Questions</button> <br><br>
+        <a href="{{ url_for('display_images', course_code='COM115', file_name='2023_exam') }}">
+            <button type="button">  View COM 115 Past Questions</button><br><br>
+        <a href="{{ url_for('display_images', course_code='GNS101', file_name='2023_exam') }}">
+            <button type="button">  View GNS 101 Past Questions</button> <br><br>
+        <a href="{{ url_for('display_images', course_code='GNS111', file_name='2023_exam') }}">
+            <button type="button"> View GNS 111 Past Questions</button> <br><br>
+        <a href="{{ url_for('display_images', course_code='MTH110', file_name='2023_exam') }}">
+            <button type="button"> View MTH 110 Past Questions</button>
+        </a>
+        
+
+        
+    </form>
+
+    <script>
+        const courseInput = document.querySelector('input[name="course_code"]');
+        const viewLink = document.getElementById('viewLink');
+    
+        courseInput.addEventListener('input', function () {
+            const code = courseInput.value.trim();
+            viewLink.href = code ? `/display/${code}` : '#';
+        });
+    </script>
+    
+</body>
+</html>

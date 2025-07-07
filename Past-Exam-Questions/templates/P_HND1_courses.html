@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fffefe;
+            padding-top: auto;
+            display: block;
+        }
+        .main{
+            display: flex;
+        }
+        .sub-main{
+            display: block;
+        }
+        form {
+            background: #fff;
+            align-self: left;
+            padding: 20px;
+            
+            margin: auto;
+            height: auto;
+            width: 60%;
+            border-radius: auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>PHARMACEUTICAL TECHNOLOGY</h1>
+    <p></p><br><br>
+    <!-- Form to upload the image -->
+    <form action="/P_HND1_upload" method="POST" enctype="multipart/form-data">
+
+        <a href="{{ url_for('display_images', course_code='GLT303', file_name='2023_exam') }}">
+           <button type="button">GLT 303 Past Questions</button><br><br>
+        <a href="{{ url_for('display_images', course_code='PCT314', file_name='2023_exam') }}">
+            <button type="button">PCT 314 Past Questions</button> <br><br>
+        <a href="{{ url_for('display_images', course_code='GLT301', file_name='2023_exam') }}">
+            <button type="button">GLT 301 Past Questions</button><br><br>
+        <a href="{{ url_for('display_images', course_code='STY312', file_name='2023_exam') }}">
+            <button type="button">STY 312 Past Questions</button> <br><br>
+        <a href="{{ url_for('display_images', course_code='PCT311', file_name='2023_exam') }}">
+            <button type="button">PCT 311 Past Questions</button> <br><br>
+        <a href="{{ url_for('display_images', course_code='COM311', file_name='2023_exam') }}">
+            <button type="button">COM 311 Past Questions</button> <br><br>
+        <a href="{{ url_for('display_images', course_code='PCT312', file_name='2023_exam') }}">
+            <button type="button">PCT 312 Past Questions</button> <br><br>
+        <a href="{{ url_for('display_images', course_code='GNS301', file_name='2023_exam') }}">
+            <button type="button">GNS 301 Past Questions</button></a> <br><br>
+        <a href="{{ url_for('display_images', course_code='STM312', file_name='2023_exam') }}">
+            <button type="button">STM 312 Past Questions</button></a><br><br>
+        <a href="{{ url_for('display_images', course_code='STH311', file_name='2023_exam') }}">
+            <button type="button">STH 311 Past Questions</button></a>
+    </form>
+
+    <script>
+        const courseInput = document.querySelector('input[name="course_code"]');
+        const viewLink = document.getElementById('viewLink');
+    
+        courseInput.addEventListener('input', function () {
+            const code = courseInput.value.trim();
+            viewLink.href = code ? `/display/${code}` : '#';
+        });
+    </script>
+    
+</body>
+</html>

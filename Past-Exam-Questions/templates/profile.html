@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile Setup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white font-sans min-h-screen overflow-hidden">
+  <div class="flash-animate text-center py-2">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+          {% for category, msg in messages %}
+            <li class="mb-2 text-{{ 'green-600' if category == 'success' else 'red-500' if category == 'error' else 'orange-500' }} font-semibold">
+              {{ msg }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div>
+  <!-- Mobile Header -->
+  <header class="bg-green-700 text-white flex items-center justify-between px-4 py-3 md:hidden">
+    <button onclick="toggleSidebar()" class="text-2xl">&#9776;</button>
+    <h1 class="text-lg font-bold">Profile Setup</h1>
+  </header>
+
+  <!-- Layout Wrapper -->
+  <div class="flex h-[calc(100vh-40px)]">
+
+    <!-- Sidebar -->
+    <aside id="sidebar"
+      class="bg-green-700 text-white w-64 space-y-6 px-6 py-6 h-full md:translate-x-0 transform transition-transform duration-300 ease-in-out fixed md:relative z-50 md:block -translate-x-full md:translate-x-0">
+      <button onclick="toggleSidebar()" class="absolute top-4 right-4 text-white text-xl md:hidden">&times;</button>
+      <nav class="space-y-4 font-semibold">
+        <a href="/home" class="block hover:underline">Home</a>
+        <a href="/profile" class="block hover:underline">Profile Setup</a>
+        <a href="/profile/view" class="block hover:underline">View Profile</a>
+        <a href="/profile/edit" class="block hover:underline">Update Profile</a>
+
+        <a href="/comsci" class="block hover:underline">Computer <br>Science</a>
+        <a href="/pharmtech" class="block hover:underline">Pharmaceutical <br>Technology</a>
+        <a href="/hospitality" class="block hover:underline">Hospitality <br>Management</a>
+        <a href="/S&M" class="block hover:underline">Statistics &<br> Mathematics</a>
+        <a href="/logout" class="block hover:underline text-red-300">Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-0 md:ml-54 p-8 overflow-y-auto">
+      <form action="/profile" method="POST" enctype="multipart/form-data" class="max-w-xl mx-auto space-y-6 bg-white shadow-lg p-6 rounded-lg">
+        <h1 class="text-3xl font-bold text-center mb-4">Set Up Your Profile</h1>
+
+        <input type="text" name="Fullname" placeholder="Full Name" required class="w-full p-3 border rounded"/>
+        <input type="email" name="Email" placeholder="Email" required class="w-full p-3 border rounded"/>
+        <input type="text" name="Matric" placeholder="Matric Number" required class="w-full p-3 border rounded"/>
+        <input type="text" name="Department" placeholder="Department" required class="w-full p-3 border rounded"/>
+        <input type="text" name="Level" placeholder="Level (e.g., ND 1, HND 2)" required class="w-full p-3 border rounded"/>
+        <input type="file" name="picture" accept="image/*">
+
+        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white w-full py-3 rounded font-semibold">
+          Save Profile
+        </button>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("-translate-x-full");
+    }
+  </script>
+</body>
+</html>
