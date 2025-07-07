@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBT Homepage</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .flash-animate {
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-white font-sans h-screen overflow-hidden">
+
+  <!-- Flash Messages -->
+  <!-- <div class="flash-animate text-center py-2">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+          {% for category, msg in messages %}
+            <li class="mb-2 text-{{ 'green-600' if category == 'success' else 'red-500' if category == 'error' else 'orange-500' }} font-semibold">
+              {{ msg }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div> -->
+
+  <!-- Mobile Header -->
+  <header class="bg-green-700 text-white flex items-center justify-between px-4 py-3 md:hidden">
+    <button onclick="toggleSidebar()" class="text-2xl">&#9776;</button>
+    <h1 class="text-lg font-bold">Past Questions Portal</h1>
+  </header>
+
+  <!-- Main Layout: Sidebar + Content -->
+  <div class="flex h-[calc(100vh-40px)]"> <!-- subtracts approx flash msg height -->
+
+    <!-- Sidebar -->
+    <aside id="sidebar"
+           class="bg-green-700 text-white w-64 space-y-6 px-6 py-6 h-full md:translate-x-0 transform transition-transform duration-300 ease-in-out fixed md:relative z-50 md:block -translate-x-full md:translate-x-0">
+
+      <!-- Close (Mobile) -->
+      <button onclick="toggleSidebar()" class="absolute top-4 right-4 text-white text-xl md:hidden">&times;</button>
+
+      <!-- User Info -->
+      <div class="flex items-center space-x-3 border-b border-green-500 pb-4 mb-4">
+        {% if user_photo_url %}
+          <img src="{{ user_photo_url }}" alt="Profile" class="w-10 h-10 rounded-full border-2 border-white"/>
+        {% else %}
+          <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center font-bold text-lg uppercase">
+            {{ FullName[0] }}
+          </div>
+        {% endif %}
+        <!-- <span class="font-semibold">{{ FullName }}</span> -->
+      </div>
+
+      <!-- Links -->
+      <nav class="space-y-4 text-base">
+        <a href="/home" class="block hover:underline">Home</a>
+        <a href="/profile" class="block hover:underline">Profile Setup</a>
+        <a href="/profile/view" class="block hover:underline">View Profile</a>
+        <a href="/profile/edit" class="block hover:underline">Update Profile</a>
+
+        <a href="/comsci" class="block hover:underline">Computer <br>Science</a>
+        <a href="/pharmtech" class="block hover:underline">Pharmaceutical <br>Technology</a>
+        <a href="/hospitality" class="block hover:underline">Hospitality <br>Management</a>
+        <a href="/S&M" class="block hover:underline">Statistics &<br> Mathematics</a>
+        <a href="/logout" class="block hover:underline text-red-300">Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="block-1 ml-0 md:ml-54 p-8 overflow-y-auto">
+      <h1 class="text-4xl font-bold mb-8 text-center">Welcome, {{ FullName }}</h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <a href="/comsci" class="bg-green-600 hover:bg-green-700 text-white py-6 px-8 rounded-lg shadow-md text-xl font-semibold text-center">Computer Science</a>
+        <a href="/pharmtech" class="bg-green-600 hover:bg-green-700 text-white py-6 px-8 rounded-lg shadow-md text-xl font-semibold text-center">Pharmaceutical Technology</a>
+        <a href="/hospitality" class="bg-green-600 hover:bg-green-700 text-white py-6 px-8 rounded-lg shadow-md text-xl font-semibold text-center">Hospitality Management</a>
+        <a href="/S&M" class="bg-green-600 hover:bg-green-700 text-white py-6 px-8 rounded-lg shadow-md text-xl font-semibold text-center">Statistics & Mathematics</a>
+      </div>
+    </main>
+  </div>
+
+  <!-- JS: Toggle sidebar -->
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("-translate-x-full");
+    }
+  </script>
+</body>
+</html>

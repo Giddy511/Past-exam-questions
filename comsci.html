@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Computer Science</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .button-style {
+      @apply bg-green-600 hover:bg-green-700 text-white py-4 px-6 rounded shadow font-semibold text-lg w-full md:w-40;
+    }
+  </style>
+</head>
+<body class="bg-white font-sans min-h-screen overflow-hidden">
+
+  <!-- Mobile Header -->
+  <header class="bg-green-700 text-white flex items-center justify-between px-12 py-3 md:hidden">
+    <button onclick="toggleSidebar()" class="text-2xl">&#9776;</button>
+    <h1 class="text-lg font-bold">Computer Science</h1>
+  </header>
+
+  <!-- Layout Wrapper -->
+  <div class="flex h-[calc(100vh-40px)]">
+
+    <!-- Sidebar -->
+    <aside id="sidebar"
+      class="bg-green-700 text-white w-50 space-y-6 px-6 py-6 h-full md:translate-x-0 transform transition-transform duration-300 ease-in-out fixed md:relative z-50 md:block -translate-x-full md:translate-x-0">
+
+      <button onclick="toggleSidebar()" class="absolute top-4 right-10 text-white text-xl md:hidden">&times;</button>
+
+      <nav class="space-y-4 text-base font-semibold">
+        <a href="/home" class="block hover:underline">Home</a>
+        <a href="/profile" class="block hover:underline">Profile Setup</a>
+        <a href="/profile/view" class="block hover:underline">View Profile</a>
+        <a href="/profile/edit" class="block hover:underline">Update Profile</a>
+
+        <a href="/comsci" class="block hover:underline">Computer <br>Science</a>
+        <a href="/pharmtech" class="block hover:underline">Pharmaceutical <br>Technology</a>
+        <a href="/hospitality" class="block hover:underline">Hospitality <br>Management</a>
+        <a href="/S&M" class="block hover:underline">Statistics &<br> Mathematics</a>
+        <a href="/logout" class="block hover:underline text-red-300">Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-10 ml-0 md:ml-64 p-6 overflow-y-auto">
+      <form class="max-w-4xl mx-auto text-center space-y-8">
+        <h1 class="text-4xl font-bold">Computer Science</h1>
+        <p class="text-lg text-gray-700">Hi {{FullName}}, click your level to get the past questions</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="/ND1_courses" class="bg-green-600 hover:bg-green-700 text-white py-6 px-8 rounded-lg shadow-md text-xl font-semibold text-center">ND 1</a>
+          <a href="/ND2_courses" class="bg-green-600 hover:bg-green-700 text-white py-6 px-8 rounded-lg shadow-md text-xl font-semibold text-center">ND 2</a>
+          <a href="/HND1_courses" class="bg-green-600 hover:bg-green-700 text-white py-6 px-8 rounded-lg shadow-md text-xl font-semibold text-center">HND 1</a>
+          <a href="/HND2_courses" class="bg-green-600 hover:bg-green-700 text-white py-6 px-8 rounded-lg shadow-md text-xl font-semibold text-center">HND 2</a>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <!-- Sidebar Toggle Script -->
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("-translate-x-full");
+    }
+  </script>
+</body>
+</html>

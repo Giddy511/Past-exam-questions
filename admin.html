@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CBT Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white font-sans min-h-screen overflow-hidden">
+
+  <!-- Flash Messages -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="absolute top-4 right-4 z-50 space-y-2">
+    {% for category, msg in messages %}
+      <div class="px-4 py-3 rounded text-white shadow-md
+        {% if category == 'success' %} bg-green-500
+        {% elif category == 'error' %} bg-red-500
+        {% elif category == 'warning' %} bg-yellow-500 text-black
+        {% else %} bg-gray-700
+        {% endif %}">
+        {{ msg }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% endwith %}
+
+  <!-- Mobile Header -->
+  <header class="bg-green-700 text-white flex items-center justify-between px-12 py-3 md:hidden">
+    <button onclick="toggleSidebar()" class="text-2xl">&#9776;</button>
+    <h1 class="text-lg font-bold">CBT Admin</h1>
+  </header>
+
+  <div class="flex h-[calc(100vh-40px)]">
+
+    <!-- Sidebar -->
+    <aside id="sidebar"
+      class="bg-green-700 text-white w-52 space-y-6 px-6 py-6 h-full md:translate-x-0 transform transition-transform duration-300 ease-in-out fixed md:relative z-50 md:block -translate-x-full md:translate-x-0">
+
+      <button onclick="toggleSidebar()" class="absolute top-4 right-6 text-white text-xl md:hidden">&times;</button>
+
+      <nav class="space-y-4 text-base font-semibold">
+        <a href="/admin" class="block hover:underline">Home</a>
+        <a href="/admin/dashboard" class="block hover:underline">Dashboard</a>
+        <a href="/admin/search" class="block hover:underline">Search for questions</a>
+      
+        <a href="/logout" class="block text-red-300 hover:underline">Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-0 md:ml-64 p-6 overflow-y-auto">
+      <h1 class="text-3xl font-bold text-center mb-8">Admin Page</h1>
+
+      <form action="/upload" method="POST" enctype="multipart/form-data"
+        class="max-w-xl mx-auto bg-white p-8 shadow-lg rounded-md space-y-6 border border-gray-100">
+
+        <div class="text-center">
+          <label class="block font-medium text-gray-700 mb-1">
+            Use UPPERCASE with NO SPACE (e.g., COM111)
+          </label>
+          <input type="text" name="course_code" placeholder="Course Code"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"/>
+        </div>
+
+        <div class="text-center">
+          <input type="text" name="file_name" placeholder="File Name"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"/>
+        </div>
+
+        <div class="text-center">
+          <label for="image" class="block font-medium text-gray-700">Choose an image:</label>
+          <input type="file" name="image" id="image" accept="image/*" required
+            class="w-full mt-2 text-gray-600"/>
+        </div>
+
+        <div class="text-center">
+          <input type="submit" value="Upload Image"
+            class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded shadow cursor-pointer"/>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("-translate-x-full");
+    }
+  </script>
+</body>
+</html>
